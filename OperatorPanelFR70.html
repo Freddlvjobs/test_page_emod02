@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>OperatorPanelFR</title>
+
+    <script type="text/javascript" src="./OperatorPanelFR70_files/jquery-2.1.0.js.download"></script>
+
+    <script type="text/javascript" src="./OperatorPanelFR70_files/bootstrap.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./OperatorPanelFR70_files/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./OperatorPanelFR70_files/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="./OperatorPanelFR70_files/bootstrap-datepicker3.min.css">
+    <script type="text/javascript" src="./OperatorPanelFR70_files/bootstrap-table.js.download"></script>
+    <script type="text/javascript" src="./OperatorPanelFR70_files/bootstrap-datepicker.min.js.download"></script>
+    <script type="text/javascript" src="./OperatorPanelFR70_files/axios.0.21.4.min.js.download"></script>
+    <meta name="csrf-token" content="NyXRmy14GBLCWnyRNLYntxUP9GKTMYBTCcaDqdvl">
+            <script type="text/javascript">
+          window.APP_CONFIG = {
+            VAPID_PUBLIC_KEY: "",
+          }
+        </script>
+        <!--script type="module">
+			import PushNotification from '/js/push/index.js?1738100942';
+			PushNotification.init({"id":19921})
+		</script-->
+        
+
+    <style type="text/css">
+        .online-red {
+            color: red;
+        }
+
+        .online-green {
+            color: lightgreen;
+        }
+
+        .container-lg {
+            width: calc(100% - 30px);
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        @media (max-width: 768px) {
+            #operator_admin_menu li {
+                width: 100%;
+            }
+        }
+
+        /*Make sure that the mobile menu collapses below 1200px */
+        @media (max-width: 1200px) {
+            .navbar-header {
+                float: none;
+            }
+
+            .navbar-left, .navbar-right {
+                float: none !important;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-collapse {
+                border-top: 1px solid transparent;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-fixed-top {
+                top: 0;
+                border-width: 0 0 1px;
+            }
+
+            .navbar-collapse.collapse {
+                display: none !important;
+            }
+
+            .navbar-nav {
+                float: none !important;
+                margin-top: 7.5px;
+            }
+
+            .navbar-nav > li {
+                float: none;
+            }
+
+            .navbar-nav > li > a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .collapse.in {
+                display: block !important;
+            }
+        }
+
+        .operator-color {
+            display: inline-block;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            box-sizing: border-box;
+        }
+
+        .operator-color-none {
+            background-color: transparent;
+        }
+
+        .operator-color-yellow {
+            border: 1px solid #F0E68C;
+        }
+
+        .pagination > li > select {
+            position: relative;
+            float: left;
+            padding: 7px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #428bca;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            height: 34px;
+        }
+
+        .badge-warning {
+            color: #fff;
+            background-color: #ffc107;
+        }
+
+        .datepicker table tr th.dow:nth-child(5n+6),
+        .datepicker table tr th.dow:nth-child(5n+7) {
+            color: red;
+        }
+
+        .modal .modal-dialog .modal-content {
+            border-radius: 6px;
+            padding: 0;
+        }
+
+        .modal .modal-dialog .close {
+            color: #ffffff;
+            opacity: 1;
+            text-shadow: 0 1px 0 #000000;
+        }
+
+        .modal .modal-dialog .modal-content .modal-header {
+            padding: 9px 15px;
+            border-bottom: 1px solid #326896;
+            background-color: #428bca;
+            color: #ffffff;
+            -webkit-border-top-left-radius: 6px;
+            -webkit-border-top-right-radius: 6px;
+            -moz-border-radius-topleft: 6px;
+            -moz-border-radius-topright: 6px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .modal .modal-dialog .modal-content .modal-body {
+            padding-top: 10px;
+        }
+
+        .modal .modal-dialog .modal-content .modal-footer {
+            padding-top: 15px;
+        }
+
+        .modal.modal-alert .modal-dialog .modal-content .modal-header {
+            border-bottom: 1px solid #d9534f;
+            background-color: #d9534f;
+        }
+
+        .modal.modal-success .modal-dialog .modal-content .modal-header {
+            background-color: #449d44;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .content {
+            min-height: 100vh;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #222;
+            width: 100%;
+
+        }
+        .footer-content {
+            display: flex;
+            justify-content: center;
+        }
+        .footer-address {
+            font-size: 12px;
+            color: #eaeaef;
+        }
+    </style>
+
+    <script type="text/javascript">
+      if (window.top !== window.self) {
+        window.top.location.href = window.location.href;
+      }
+
+      $(function () {
+        $('.delete-are-you-sure').click(function () {
+          if ($(this).data('message')) {
+            return window.confirm($(this).data('message'));
+          }
+          return window.confirm("Es-tu sûr?");
+        });
+
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+      })
+    </script>
+    <script src="chrome-extension://ddbjnfjiigjmcpcpkmhogomapikjbjdk/base.js"></script></head>
+<body style="zoom: 1.17;">
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://frmoderation.com/messages#" style="padding-top:0; padding-bottom:0;">
+                <img src="./OperatorPanelFR70_files/8.png" alt="">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="https://frmoderation.com/">Accueil</a>
+                </li>
+                                    <li class="active">
+                        <a href="https://frmoderation.com/messages">Messages</a>
+                    </li>
+                                                                
+                
+                
+                                    <li>
+                        <a href="https://frmoderation.com/stats">Stats</a>
+                    </li>
+                
+                <li>
+                    <a href="https://frmoderation.com/logout">Quitter</a>
+                </li>
+
+                
+                <!--li>
+						<a href="https://frmoderation.com/notifications">Notifications                                </a>
+            </li-->
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://frmoderation.com/wall">
+                        <span style="color: white;margin-right: 20px;font-weight: bold; font-size: larger;">7,56 €</span><span class="glyphicon glyphicon-user"></span> Frederic D
+                        (19921
+                        )
+
+                        
+                        <div style="position:absolute; top:15px; right:-46px; color:white; padding-top:15px; font-size:10px; width:100px;">22:49:02</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="content container" style="margin-top:70px">
+
+    
+    
+    
+    <script type="text/javascript">
+      $(function(){
+                    $(document).on('show.bs.modal', '.modal', function (event) {
+            let zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+              $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+          });
+      })
+    </script>
+
+    
+<script type="text/javascript">
+$(function(){
+	$('textarea#message').focus();
+
+
+})
+</script>
+
+<style type="text/css">
+#accordion1 h4:after,
+#accordion2 h4:after,
+#accordion3 h4:after,
+#accordion4 h4:after{
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: grey;
+}
+#accordion1 h4.collapsed:after,
+#accordion2 h4.collapsed:after,
+#accordion3 h4.collapsed:after,
+#accordion4 h4.collapsed:after{
+    content:"\e080";
+}
+
+.attachment-pop {
+	cursor: pointer;
+}
+
+#message { height:100px; }
+
+form.has-error #message {
+	background-color: red;
+}
+
+#log_book_status_wrapper {
+	position: relative;
+	cursor: pointer;
+}
+
+#log_book_status_wrapper.check-status {
+	min-height: 30px;
+}
+
+#log_book_text { height:70px; }
+
+/*.log_book_item:not(:last-child) { border-bottom:0; }*/
+
+.log-book-container .panel-body { padding-top:0; padding-bottom:0; }
+.log-book-container .row { border-bottom:1px solid #eee; padding-bottom:10px; padding-top:10px; }
+
+#message_sender textarea { color:black;  }
+
+.loader-container {
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+.loader {
+	position: relative;
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	animation: around 5.4s infinite;
+}
+
+@keyframes around {
+	0% {
+		transform: rotate(0deg)
+	}
+	100% {
+		transform: rotate(360deg)
+	}
+}
+
+.loader::after, .loader::before {
+	content: "";
+	background: white;
+	position: absolute;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	border-width: 2px;
+	border-color: #333 #333 transparent transparent;
+	border-style: solid;
+	border-radius: 20px;
+	box-sizing: border-box;
+	top: 0;
+	left: 0;
+	animation: around 0.7s ease-in-out infinite;
+}
+
+.loader::after {
+	animation: around 0.7s ease-in-out 0.1s infinite;
+	background: transparent;
+}
+
+
+</style>
+
+<script type="text/javascript" src="./OperatorPanelFR70_files/lightbox.min.js.download"></script>
+<link rel="stylesheet" type="text/css" href="./OperatorPanelFR70_files/lightbox.css">
+
+
+<script type="text/javascript">
+$(function(){
+
+		
+	$('textarea#message').keyup(function() {
+		let total = parseInt(204),
+            remaining = total - this.value.length;
+		if (remaining > 0) {
+			$('#message_sender input[type=submit]').attr('disabled', 'disabled');
+			$('.charactercount').html('Faltan <strong>' + remaining + '</strong> caracteres');
+		} else {
+			$('#message_sender input[type=submit]').removeAttr('disabled')
+			$('.charactercount').html('<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>');
+		}
+	});
+	
+	let timeoutCountDown = 0;
+	(function enableButtonCountDown(button) {
+		const buttonMessage = button.val();
+		let timeoutId = null;
+		timeoutCountDown++;
+
+		$(window).on("blur focus", function (e) {
+			let prevType = $(document.body).data("prevType");
+			if (prevType !== e.type) {   //  reduce double fire issues
+				switch (e.type) {
+					case "blur":
+						clearInterval(timeoutId);
+						timeoutCountDown++;
+						break;
+					case "focus":
+						if (timeoutCountDown) {
+							countDown();
+						}
+						break;
+				}
+			}
+			$(document.body).data("prevType", e.type);
+		});
+
+		function countDown() {
+			if (timeoutId) {
+				clearTimeout(timeoutId);
+			}
+			timeoutCountDown--;
+			if (timeoutCountDown > 0) {
+				button.val(buttonMessage + ' (' + timeoutCountDown + 's)');
+				timeoutId = setTimeout(countDown, 1000);
+			} else {
+				timeoutCountDown = 0;
+				button.val(buttonMessage);
+			}
+		}
+
+		countDown();
+	})($('#message_sender input[type=submit]'));
+
+	$('textarea#message').on('keyup', function(){
+		const form = $(this).closest('form');
+		const regex = /\[\s*and\s*\]|\(\s*and\s*\)/gi;
+		if (regex.test($(this).val())) {
+			form.addClass('has-error');
+		} else {
+			form.removeClass('has-error');
+		}
+	});
+
+	$('#message_sender form').on('submit', function(event) {
+		if (timeoutCountDown > 0) {
+			event.preventDefault();
+			alert('Please wait ' + timeoutCountDown + 's');
+			return false;
+		}
+		if ($(this).hasClass('has-error')) {
+			alert('Combination of ( and ) or [ and ] are not allowed');
+			event.preventDefault();
+			return false;
+		}
+		$('#message_sender input[type=submit]').attr('disabled', 'disabled');
+		return true;
+	})
+
+	$('.attachment_id').click(function(){
+		$('input[name=attachment_id]').val($(this).val());
+	});
+
+	const pastedTexts = [];
+
+	function countWords(str) {
+		let matches = str.match(/[\w\d\’\'-]+/gi);
+		return matches <span style="background-color: yellow;">?</span> matches.length : 0;
+	}
+
+	$("textarea#message").bind("paste", function(e){
+		const text = e.originalEvent.clipboardData.getData('text');
+		if(countWords(text) > 5 && !pastedTexts.includes(text)) {
+			pastedTexts.push(text)
+		}
+	});
+
+	/**
+	 * Send the log of message via ajax request
+	 *
+	 * @returns {Promise<unknown>}
+	 */
+	function sendLog() {
+		return new Promise((resolve) => {
+			$.ajax({
+				type: "POST",
+				contentType: "application/json",
+				url: "https://frmoderation.com/log-messages",
+				data: JSON.stringify({
+					pasted_texts: pastedTexts,
+					changed_text: $("textarea#message").val()
+				}),
+				complete() {
+					resolve()
+				}
+			})
+		})
+	}
+
+
+	$('.log_book_post').submit(function(){
+		var category_id = $(this).find('select#log_book_category_id').val();
+		var text = $(this).find('#log_book_text').val();
+		var type = $(this).data('type');
+		var parent = $(this).parent().parent().parent();
+		let category = $('.logbook_' + category_id, parent).data('name');
+		let count = $('.logbook_' + category_id + ' .row', parent).length;
+		if (count >= 3) {
+			alert('Maximum 3' + ( ' ' + category || ''));
+			this.reset();
+			return false;
+		}
+
+		$.post('https://frmoderation.com/log-books/create', {
+			'conversation_id': $(this).data('conversationId'),
+			'user_id': $(this).data('userId'),
+			'category_id': category_id,
+			'text': text,
+			'type': type,
+						'message_id': 219396390,
+								}, function(data){
+
+			console.log(data);
+			parent.find('.logbook_' +  category_id + ' .panel-body').append('<div class="row"><div class="col-lg-10 log-book-text">' + text + '</div><div class="col-lg-2 delete-log-container"><button class="btn btn-xs btn-danger delete-log" data-id="' + data + '" data-type="' + type + '">X</button></div></div>');
+
+			update_log_book_state();
+		});
+
+		this.reset();
+
+		return false;
+	});
+
+	$(document).on('click', '.delete-log', function(){
+
+		var $this = $(this);
+
+		$.post('https://frmoderation.com/log-books/delete', {
+			'id': $(this).data('id'),
+			'text': $(this).parent().parent().find('.log-book-text').text(),
+			'type': $(this).data('type'),
+						'message_id': 219396390,
+								}, function(data){
+			$this.parent().parent().remove();
+			alert('Effacé');
+
+			update_log_book_state();
+		});
+	});
+
+	let logBookStatusWrapper = $('#log_book_status_wrapper');
+
+	function addLogBookStatusChange(wrapper, profile) {
+		if ('log_books_locked' in profile) {
+			if (profile.log_books_locked) {
+								$('#log_book_fake_wrapper').closest('.panel-body').remove();
+							} else {
+								$('#log_book_fake_wrapper').removeClass('hidden');
+			}
+		}
+	}
+	
+	if (logBookStatusWrapper.hasClass('check-status')) {
+		let loader = $('<div class="loader-container"><i class="loader"></i></div>');
+		loader.appendTo(logBookStatusWrapper);
+		$.post('https://frmoderation.com/log-books/status', {id: 10637598}).then(response => {
+			loader.remove();
+			logBookStatusWrapper.removeClass('check-status');
+			if (response.profile) {
+				addLogBookStatusChange(logBookStatusWrapper, response.profile)
+			}
+		})
+	}
+
+	function update_log_book_state()
+	{
+		$('.log_book_item').each(function()
+		{
+			if($(this).has('.row').size()){
+				$(this).show();
+			}
+			else{
+				$(this).hide();
+			}
+		});
+	}
+
+	update_log_book_state();
+
+	
+	$('#message_sender form').submit(function(event){
+		let length = parseInt(204);
+		let  $this = $(this);
+		if ($('textarea[name=message]').val().length < length) {
+			return false;
+		}
+
+		if(pastedTexts.length) {
+			event.preventDefault();
+			$this.unbind("submit");
+			sendLog().then(() => {
+				$this.submit();
+			})
+			return false;
+		}
+
+	});
+
+	$('textarea.comment_textarea').change(function(){
+
+		$('input[name=comment]').val($(this).val());
+
+	    $('.comment-button').css('color', $(this).val() <span style="background-color: yellow;">?</span> 'blue' : 'silver');
+	})
+
+	
+	
+	$(".attachment-pop").on("click", function() {
+		$('#attachment-preview').attr('src', $(this).attr('src'));
+		$('#attachment-modal').modal('show');
+	});
+	$(".logbook-pop").on("click", function() {
+		$('#logbook-modal').modal('show');
+	});
+})
+</script>
+
+<div class="row">
+
+	<div class="col-lg-3" style="">
+
+				<div class="panel panel-default">
+		  <div class="panel-body" style="text-align:center; position:relative; padding:0;">
+		  	<small style="position:absolute; left:5px; top:5px;">52</small>
+		  	<small style="position:absolute; left:5px; bottom:5px;">14.00</small>
+		  	<strong style="font-size:26px; line-height:50px; color:green">7,56 €</strong>
+		  	<small style="position:absolute; right:5px; top:5px; color:red;">248</small>
+		  			  	<small style="position:absolute; right:5px; bottom:5px; color:green;">54,00 €</small>
+		  			  </div>
+		</div>
+		
+
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Operateur: Zenius (ID: 10637598)
+		  </div>
+		  <div class="panel-body">
+		  	<img src="./OperatorPanelFR70_files/57e0b734be0e34b360a9fad57aad4fe16d4c05a3.jpg" class="img-responsive img-rounded">
+		  	<div style="float:left; padding-top:15px; width:100%">
+
+		  				  			<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  				<a href="./OperatorPanelFR70_files/57e0b734be0e34b360a9fad57aad4fe16d4c05a3.jpg" data-lightbox="Zenius">
+		  					<img src="./OperatorPanelFR70_files/57e0b734be0e34b360a9fad57aad4fe16d4c05a3.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  				</a>
+		  			</div>
+		  				  			<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  				<a href="./OperatorPanelFR70_files/458bfd339e05d4e3221bde244ced62824f682f77.jpg" data-lightbox="Zenius">
+		  					<img src="./OperatorPanelFR70_files/458bfd339e05d4e3221bde244ced62824f682f77.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  				</a>
+		  			</div>
+		  				  			<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  				<a href="./OperatorPanelFR70_files/1cb6ae5ede7f597d036af8d362ce0afe385cb870.jpg" data-lightbox="Zenius">
+		  					<img src="./OperatorPanelFR70_files/1cb6ae5ede7f597d036af8d362ce0afe385cb870.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  				</a>
+		  			</div>
+		  				  			<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  				<a href="./OperatorPanelFR70_files/9d2ded214de28547347d0e27e5676ca31671f8a7.jpg" data-lightbox="Zenius">
+		  					<img src="./OperatorPanelFR70_files/9d2ded214de28547347d0e27e5676ca31671f8a7.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  				</a>
+		  			</div>
+		  				  			<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  				<a href="./OperatorPanelFR70_files/80c75cfa751257705a6413112a6700d5affa15dd.jpg" data-lightbox="Zenius">
+		  					<img src="./OperatorPanelFR70_files/80c75cfa751257705a6413112a6700d5affa15dd.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  				</a>
+		  			</div>
+		  		
+		  	</div>
+
+		  	<div class="row" style="padding-top:15px;">
+		  		<div class="col-lg-6">
+		  			<dl style="margin:0; padding:0;">
+						<dt>Nom</dt>
+						<dd>Carole</dd>
+		  			</dl>
+		  		</div>
+		  		<div class="col-lg-6">
+		  			<dl style="margin:0; padding:0;">
+						<dt>Pseudo</dt>
+						<dd>Zenius</dd>
+		  			</dl>
+		  		</div>
+		  	</div>
+
+	  	  	<div class="row">
+	  	  		<div class="col-lg-6">
+	  	  			<dl style="margin:0; padding:0;">
+	  					<dt>Sexe</dt>
+	  					<dd>Femme</dd>
+	  	  			</dl>
+	  	  		</div>
+	  	  		<div class="col-lg-6">
+	  	  			<dl style="margin:0; padding:0;">
+	  					<dt>cherche</dt>
+	  					<dd>Homme</dd>
+	  	  			</dl>
+	  	  		</div>
+	  	  	</div>
+
+  	  	  	<div class="row">
+  	  	  		<div class="col-lg-6">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dt>Couleur des cheveux</dt>
+  	  					<dd>Châtains</dd>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  		<div class="col-lg-6">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dt>Couleur des yeux</dt>
+  	  					<dd>Marrons</dd>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  	</div>
+
+  	  	  	<div class="row">
+  	  	  		<div class="col-lg-6">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dt>Silhouette</dt>
+  	  					<dd>Mince</dd>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  		<div class="col-lg-6">
+		  			<dl style="margin:0; padding:0;">
+						<dt>Age</dt>
+						<dd>
+							<span style="font-weight:bold; color:green">
+								30
+							</span>
+							<small>(30-11-1994)</small>
+						</dd>
+		  			</dl>
+  	  	  		</div>
+  	  	  	</div>
+
+  	  	  	  	<div class="row">
+  	  	  	  		<div class="col-lg-6">
+  	  	  	  			<dl style="margin:0; padding:0;">
+  	  	  					<dt>taille (cm)</dt>
+  	  	  					<dd>166</dd>
+  	  	  	  			</dl>
+  	  	  	  		</div>
+  	  	  	  		<div class="col-lg-6">
+  	  	  	  			<dl style="margin:0; padding:0;">
+  	  	  					<dt>Poids (kg)</dt>
+  	  	  					<dd>57</dd>
+  	  	  	  			</dl>
+  	  	  	  		</div>
+  	  	  	  	</div>
+
+  	  	  	<div class="row">
+  	  	  		<div class="col-lg-6">
+		  			<dl style="margin:0; padding:0;">
+						<dt>Fumeur</dt>
+						<dd>Non</dd>
+		  			</dl>
+  	  	  		</div>
+  	  	  		<div class="col-lg-6" style="background-color: yellow;">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dt>Statut marital</dt>
+  	  					<dd>Relation libre</dd>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  	</div>
+
+  	  	  	<div class="row" style="padding-top:10px; padding-bottom:10px">
+  	  	  		<div class="col-lg-12">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dd style="color:lightgreen">
+  	  						France, Rhône-Alpes, GRENOBLE
+  	  					</dd>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  	</div>
+
+  	  	  	<div class="row" style="padding-bottom: 10px; background-color: yellow;">
+  	  	  		<div class="col-lg-12">
+  	  	  			<dl style="margin:0; padding:0;">
+  	  					<dt>Prise de contact: <span style="font-weight:normal">20-12-2024</span></dt>
+  	  	  			</dl>
+  	  	  		</div>
+  	  	  	</div>
+
+	  	  	<hr style="margin:0; padding-top:10px">
+
+	  	  	<p>
+	  	  		<strong>Description</strong><br>
+	  	  		
+	  	  	</p>
+	  	</div>
+	</div>
+
+				<div class="panel panel-default" style="margin-bottom:0; border-bottom:0;">
+		  <div class="panel-heading">Information personelle du Profil fictif</div>
+		  <div class="panel-body">
+			<div id="log_book_status_wrapper" style="margin-bottom: 1rem">
+							</div>
+		  	<form method="post" id="log_book_fake_wrapper" class="log_book_post " data-type="fake" data-conversation-id="2256992884" data-user-id="10637598" data-operator-id="19921">
+		  	<input type="hidden" name="_token" value="NyXRmy14GBLCWnyRNLYntxUP9GKTMYBTCcaDqdvl">
+		  	<div class="form-group"><label class="control-label" for="log_book_category_id">Categorie</label><select name="log_book_category_id" id="log_book_category_id" class="form-control" style="visibility: visible;"><option value="2">Prénom</option><option value="4">Localisation</option><option value="5">Travail</option><option value="6">Passions</option><option value="7">Preferences sexuelles</option><option value="8">habite avec/chez</option><option value="9">Relations</option><option value="10">Santé</option></select></div>
+		  	<div class="form-group"><label class="control-label" for="log_book_text">Information</label><textarea name="log_book_text" rows="10" cols="50" id="log_book_text" class="form-control"></textarea></div>
+		  	<button type="submit" class="btn btn btn-success col-lg-12">Ajouter information personnelle</button>
+		  	</form>
+		  </div>
+		</div>
+
+		<div class="panel-group" id="accordion1">
+
+					    <div class="panel panel-default log_book_item" id="panel1" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_1" style="cursor:pointer">Données importantes</h4>
+		        </div>
+		        <div id="receiver_logbook_1" data-name="Données importantes" class="logbook_1 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 3945">
+			            		<div class="col-lg-10 log-book-text">aime les plats épicés</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 7907">
+			            		<div class="col-lg-10 log-book-text">Origine philippienne</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 6016">
+			            		<div class="col-lg-10 log-book-text">Signe astrologique lion</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 9192">
+			            		<div class="col-lg-10 log-book-text">Ce weekend, j'ai encore du travail à faire chez mes parents pour la fête d'anniversaire de leur mariage</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 4271">
+			            		<div class="col-lg-10 log-book-text">Je ne reçois pas des personnes que je n'ai jamais rencontré la nuit, je préfère une rencontre en journée</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel2" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_2" style="cursor:pointer">Prénom</h4>
+		        </div>
+		        <div id="receiver_logbook_2" data-name="Prénom" class="logbook_2 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 2522">
+			            		<div class="col-lg-10 log-book-text">Mon prénom est Carole.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 3994">
+			            		<div class="col-lg-10 log-book-text">Carole</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 20005">
+			            		<div class="col-lg-10 log-book-text">J'aime sucer et j'aime boire le sperme. J'ai un gode et un vibro.</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel3" style="margin: 0px; border-radius: 0px; display: none;">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_3" style="cursor:pointer">Apparence</h4>
+		        </div>
+		        <div id="receiver_logbook_3" data-name="Apparence" class="logbook_3 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel4" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_4" style="cursor:pointer">Localisation</h4>
+		        </div>
+		        <div id="receiver_logbook_4" data-name="Localisation" class="logbook_4 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 2363">
+			            		<div class="col-lg-10 log-book-text">Mistral</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 20005">
+			            		<div class="col-lg-10 log-book-text">Je n'aime pas les trucs dégradants.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 23347">
+			            		<div class="col-lg-10 log-book-text">mon copain, je l'ai rencontré à une soirée entre amis il y a un peu plus d'un an. On a tout de suite accroché ! Oui, il fume des joints de temps en temps, mais ce n'est pas vraiment mon truc, même si j'ai essayé une fois ou deux.</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel5" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_5" style="cursor:pointer">Travail</h4>
+		        </div>
+		        <div id="receiver_logbook_5" data-name="Travail" class="logbook_5 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 2522">
+			            		<div class="col-lg-10 log-book-text">Je travaille en tant qu'éducatrice spécialisée.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 3623">
+			            		<div class="col-lg-10 log-book-text">je suis éducatrice spécialisée dans un centre de rééducation fonctionnelle pour enfants</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 11320">
+			            		<div class="col-lg-10 log-book-text">ça fait 7 ans que je suis dans ce domaine</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 5501">
+			            		<div class="col-lg-10 log-book-text">Ca m'arrive de travailler le weekend.</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel6" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_6" style="cursor:pointer">Passions</h4>
+		        </div>
+		        <div id="receiver_logbook_6" data-name="Passions" class="logbook_6 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 2522">
+			            		<div class="col-lg-10 log-book-text">J'aime bien aller au cinéma.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 2522">
+			            		<div class="col-lg-10 log-book-text">J'adore regarder des dessins animés.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 7080">
+			            		<div class="col-lg-10 log-book-text">Je bois de l'alcool, mais pas trop</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 6488">
+			            		<div class="col-lg-10 log-book-text">j'aime le vin, je bois un peu de tout, mais je préfère le rouge</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 3701">
+			            		<div class="col-lg-10 log-book-text">Elle aime nager et faire du vélo</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 3701">
+			            		<div class="col-lg-10 log-book-text">Aime voyager</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 3701">
+			            		<div class="col-lg-10 log-book-text">Aime faire du karaoké</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 9938">
+			            		<div class="col-lg-10 log-book-text">nage et vélo en loisirs, pas du tout sportive</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel7" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_7" style="cursor:pointer">Preferences sexuelles</h4>
+		        </div>
+		        <div id="receiver_logbook_7" data-name="Preferences sexuelles" class="logbook_7 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 1845">
+			            		<div class="col-lg-10 log-book-text">Je pratique la sodomie</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 5587">
+			            		<div class="col-lg-10 log-book-text">soumise</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 7274">
+			            		<div class="col-lg-10 log-book-text">Je lis des livres érotiques et j'adore ça</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 5919">
+			            		<div class="col-lg-10 log-book-text">levrette</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel8" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_8" style="cursor:pointer">habite avec/chez</h4>
+		        </div>
+		        <div id="receiver_logbook_8" data-name="habite avec/chez" class="logbook_8 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 20005">
+			            		<div class="col-lg-10 log-book-text">Je l'ai fait la première fois avec mon mec quand j'étais au lycée. J'avais 17 ans à l'époque.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 16928">
+			            		<div class="col-lg-10 log-book-text">J'habite dans un appartement</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 19048">
+			            		<div class="col-lg-10 log-book-text">On n'est plus ensemble, mais on a du mal à se quitter, du coup, des fois, il vient chez moi pour me baiser</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel9" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_9" style="cursor:pointer">Relations</h4>
+		        </div>
+		        <div id="receiver_logbook_9" data-name="Relations" class="logbook_9 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 4175">
+			            		<div class="col-lg-10 log-book-text">Mon copain me surveille encore</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 5919">
+			            		<div class="col-lg-10 log-book-text">ça fait 3 mois que je ne suis plus avec lui. Il m'a trompé</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 11058">
+			            		<div class="col-lg-10 log-book-text">pas d'enfant mais veux deux garçons</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel10" style="margin:0; border-radius:0; 1">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_10" style="cursor:pointer">Santé</h4>
+		        </div>
+		        <div id="receiver_logbook_10" data-name="Santé" class="logbook_10 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            				            				            	<div class="row" title="Operator ID: 21835">
+			            		<div class="col-lg-10 log-book-text">D'habitude, je commence à 8&nbsp;h&nbsp;30 pour finir à 18 h (boulot).</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 17856">
+			            		<div class="col-lg-10 log-book-text">plus du S, sinon, je fais du 37 en pointure.</div>
+															</div>
+			            				            	<div class="row" title="Operator ID: 18721">
+			            		<div class="col-lg-10 log-book-text">adore les fessées et faire l'amour brutal</div>
+															</div>
+			            			            			            </div>
+		        </div>
+		    </div>
+		    		    <div class="panel panel-default log_book_item" id="panel11" style="margin: 0px; border-radius: 0px; display: none;">
+		        <div class="panel-heading">
+		             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#receiver_logbook_11" style="cursor:pointer">Otros</h4>
+		        </div>
+		        <div id="receiver_logbook_11" data-name="Otros" class="logbook_11 log-book-container panel-collapse collapse">
+		            <div class="panel-body">
+		            			            </div>
+		        </div>
+		    </div>
+		    
+		</div>
+
+		
+	<div class="panel panel-default">
+	<div class="panel-body">
+
+	  	  	<h4>Pour</h4>
+
+	  	  	<ul class="list-group">
+	  	  			  	  			<li class="list-group-item">Amitié</li>
+	  	  			  	  			<li class="list-group-item">Tchater</li>
+	  	  			  	  			<li class="list-group-item">Sortir</li>
+	  	  			  	  			<li class="list-group-item">Autres activités</li>
+	  	  			  	  	</ul>
+
+	  	  	<hr style="margin:0; padding-top:10px">
+
+	  	  	<h4>Tes préférences</h4>
+
+	  	  	<ul class="list-group">
+	  	  			  	  			<li class="list-group-item">Cybersexe</li>
+	  	  			  	  			<li class="list-group-item">Heterosexuel</li>
+	  	  			  	  			<li class="list-group-item">Massages</li>
+	  	  			  	  			<li class="list-group-item">Déguisements / Jeux</li>
+	  	  			  	  	</ul>
+
+	  	  	<hr style="margin:0; padding-top:10px">
+
+	  	  	<h4>Ton caractère</h4>
+
+	  	  	<ul class="list-group">
+	  	  			  	  			<li class="list-group-item">Tendre</li>
+	  	  			  	  			<li class="list-group-item">Curieux</li>
+	  	  			  	  			<li class="list-group-item">Sensible</li>
+	  	  			  	  			<li class="list-group-item">Soumis</li>
+	  	  			  	  			<li class="list-group-item">Timide</li>
+	  	  			  	  	</ul>
+
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-lg-6" style="">
+
+
+		
+							<div class="alert" style="background-color:yellow;color:black">
+				<span>
+				<i class="glyphicon glyphicon-envelope"></i>
+				17 messages disponibles</span>
+				<span class="pull-right">
+
+					<i class="glyphicon glyphicon-user"></i>
+					<span title="Nombre d&#39;utilisateurs contactés dans les 10 derniers messages envoyés.">2</span>
+					/
+					<span title="Utilisateurs contactés / Messages envoyés">88</span>
+
+					<span title="Packs achetés">
+					<i class="glyphicon glyphicon-shopping-cart" style="text-indent: 10px"></i>
+					5+
+					</span>
+				</span>
+			</div>
+				
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading pull-left" style="width:100%">Conversation (ID: 2256992884)
+		  			  			  	<!-- <a class="btn btn-xs btn-warning pull-right" id="skip" data-toggle="modal" data-target="#return">Retourner au système</a> -->
+		  	
+		  	
+		  </div>
+		  <div class="panel-body" id="message_sender">
+
+		  	
+			  				  					  			<form method="POST" action="https://frmoderation.com/messages/send_message"><input type="hidden" name="_token" value="NyXRmy14GBLCWnyRNLYntxUP9GKTMYBTCcaDqdvl">
+			  		
+			  	<input type="hidden" name="message_id" value="219396390">
+
+
+			  				  		<input type="hidden" name="attachment_id">
+			  				  	<div class="form-group"><label class="control-label" for="message"></label><textarea name="message" rows="10" cols="50" id="message" class="form-control" style="width: 610px; height: 160px; position: relative; left: -43px; top: -60px; margin-bottom: -70px;"></textarea></div>
+			  	<input type="hidden" name="delay" value="1">
+			  	<input type="hidden" name="comment">
+			  	<input type="hidden" name="original">
+
+				<div class="row">
+					<div class="col-xs-4">
+			  				  	<input type="submit" value="Envoyer" class="btn btn-success" tabindex="0">
+			  						</div>
+					<div class="col-xs-4">
+																	</div>
+					<div class="col-xs-4">
+			  				  		<a class="btn btn-danger pull-right delete-are-you-sure" id="skip" href="https://frmoderation.com/messages/delete" style="margin-left:15px">Effacer</a>
+			  	
+			  	
+			  	
+			  				  	<div class="pull-right charactercount" style="padding-top:6px"><span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span></div>
+			  						</div>
+				</div>
+			  	</form>
+
+		  	
+		  	
+		  	<hr>
+
+		  	<div class="col-lg-12 chat_history_container" style="max-height: 900px; overflow: hidden scroll; font-size: 14px;">
+
+		  	<dl class="chat_history">
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">22:48</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Le problème c'est que <span style="background-color: yellow;">tu</span> veux quelque chose que <span style="background-color: yellow;">tu</span> peux pas avoir tant que <span style="background-color: yellow;">tu</span> reste avec ton connard de mec. Je veux bien t'offrir du régulier mais pour ça faudrait déjà commencer à le faire pour avoir du régulier. Et pour le sexfriend, on peux le faire si <span style="background-color: yellow;">tu</span> es seule sinon ça sera impossible et vouer à l'échec si <span style="background-color: yellow;">tu</span> es toujours avec lui. Moi je t'offre le resto sans problème si <span style="background-color: yellow;">tu</span> m'offre ta chatte après le resto.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alice G (6223)
+">Zenius
+    			le <span style="color:green;">28-01-2025</span>
+    			à <span style="color:green;">22:36</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Et bien moi j'ai toujours dit que je recherchais du régulier, donc sexfriend et je fais pas que m'allonger, je sais partager des trucs de temps en temps, un restau une balade qu'importe ahah ! Non <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">22:26</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Je te respecte, y'a pas de soucis. Bien sur que le consentement est important et je te forcerai pas à faire quelque chose si <span style="background-color: yellow;">tu</span> veux pas. J'ai jamais dis que les femmes étaient des sacs à remplir. J'ai juste dis ça pour te donner envie, moi qui voulait t'exciter ben c'est raté. J'ai toujours été honnête et clair  sur ce sujet. Je suis ici pour le sexe, pourquoi <span style="background-color: yellow;">tu</span> t'attend à autres de notre relation <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alice G (6223)
+">Zenius
+    			le <span style="color:green;">28-01-2025</span>
+    			à <span style="color:green;">22:18</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Oui j'avais compris mais j'aime bien qu'on me respecte un minimum, je pense que le consentement c'est important on n'est pas des sacs à remplir nous les femmes, et sinon à part le cul qu'est-ce que <span style="background-color: yellow;">tu</span> attends de notre relation <span style="background-color: yellow;">?</span> Bisous à toi !
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">21:46</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Je t'explique simplement que ton anus me donne extrêmement envie et c'est dommage que je ne puisse pas le voir. J'ai très envie de perforée ton cul de ma queue en aggripant tes hanches de mes mains fermes bien attaché à toi. Pendant que je baiserai ton cul, je te ferai te redresser contre moi. Je te tirait les cheveux et caresserai ta chatte et te doigterai également pour te faire jouir encore et encore jusqu'à ce que <span style="background-color: yellow;">tu</span> en puisses plus et plus encore. Je remplirai ton cul de mon sperme.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Virginie H (23143)
+">Zenius
+    			le <span style="color:green;">28-01-2025</span>
+    			à <span style="color:green;">21:36</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Par contre, <span style="background-color: yellow;">tu</span> vois, je n'aime pas trop qu'on me force la main pour obtenir des choses. Je te dis non que je n'ai pas envie de faire ce genre de photo et <span style="background-color: yellow;">tu</span> forces. Pourtant, <span style="background-color: yellow;">tu</span> devrais comprendre que je n'ai pas envie, ça reste mon corps.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">21:27</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Pourtant <span style="background-color: yellow;">tu</span> m'avais dit que <span style="background-color: yellow;">tu</span> le ferais pour moi la dernière fois. <span style="background-color: yellow;">Tu</span> avais juste pas le temps de le faire <span style="background-color: yellow;">tu</span> m'avais dit. Ben non un trou du cul c'est pas un trou du cul, c'est comme t'as chatte, elle est différente des autres Ben ton trou du cul est différente des autres aussi. C'est pour mon moral et si <span style="background-color: yellow;">tu</span> veux je peux t'accorder une faveur en échange de ton petit trou du cul. Disons que généralement je reprend mon envie assez rapidement. Montre moi ce que je veux percer de mon dare.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Virginie H (23143)
+">Zenius
+    			le <span style="color:green;">28-01-2025</span>
+    			à <span style="color:green;">21:13</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Je n'ai pas envie de prendre ni d'envoyer ce genre de photo. Et un trou du cul, c'est un trou du cul. Mais je vois que cette grippe ne t'empêche pas d'avoir des idées coquines. Je n'aurais pas pensé que cette grippe allait t'éveiller ces envies-là.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">21:07</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Ouais elle est bien hard. Oui j'arrive à me nourrir mais avec difficulté. Moi j'en suis sûr, ça me remonterai le moral car je suis vraiment pas en forme. Ben <span style="background-color: yellow;">tu</span> peux en prendre une pour moi, c'est facile. <span style="background-color: yellow;">Tu</span> vas au toilette et <span style="background-color: yellow;">tu</span> prends en photo ton petit trou. Je me doute bien que pour une fan de sodomie qu'il a déjà été percé mais il ne l'a pas été par ma queue et par mon doigté. <span style="background-color: yellow;">Tu</span> sais, je sais bien mis prendre avec un petit trou. Je vais bien m'occuper du tiens. Montre moi le tiens stp.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Virginie H (23143)
+">Zenius
+    			le <span style="color:green;">28-01-2025</span>
+    			à <span style="color:green;">20:53</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Coucou, je vais bien, merci. Je vois que toi, ça ne va pas mieux. Je te l'avais dit cette grippe, elle est vraiment hard. <span style="background-color: yellow;">Tu</span> arrives à te nourrir un peu pour reprendre des forces <span style="background-color: yellow;">?</span> Je ne suis pas sûre que ça t'aide à guérir. Je n'ai pas de photo de mon cul. Je suis désolée. Après, <span style="background-color: yellow;">tu</span> sais, il a déjà été percé.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">28-01-2025</span>
+    			à <span style="color:gray">20:40</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Salut, ça va <span style="background-color: yellow;">?</span> Moi ça va enfin c'est relatif vu que je suis encore bien malade et que pour l'instant ça s'arrange pas. Quoi de neufs ma petite chatte favorite<span style="background-color: yellow;">?</span> <span style="background-color: yellow;">Tu</span> sais, je me disais que si <span style="background-color: yellow;">tu</span> m'envoyer une photo de ton petit trou, ça me remonterai le moral et m'aiderai à guérir. Oh oui une belle photo de ton petit trou du cul, où on le voit bien, ce petit trou que je vais percer de ma queue bien dur. Je vais l'ouvrir bien l'ouvrir jusqu'à ce que je soit bien au fond et que <span style="background-color: yellow;">tu</span> jouisse de moi.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">27-01-2025</span>
+    			à <span style="color:green;">00:10</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Pas de problème, je ne veux pas te forcer à rester éveillé. Continue à te reposer et à prendre du Doliprane pour faire baisser les symptômes ! Je suis sûre que <span style="background-color: yellow;">tu</span> seras bientôt remise de tout ça. Aller je t'embrasse fort, dors bien.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">27-01-2025</span>
+    			à <span style="color:gray">00:07</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Si <span style="background-color: yellow;">tu</span> veux bien qu'on discute une prochaine fois stp, j'en peux plus de rester éveillé mais pour répondre à ta question, je pense qu'il y a du mieux mais c'est pas la grande forme non plus. Moi aussi j'espère m'en remettre car je veux être en forme pour m'occuper de ton petit cul. Moi aussi je t'embrasse et j'espère que bientôt, <span style="background-color: yellow;">tu</span> auras une solution pour qu'on puisse se voir. Bisous et bonne nuit pleins de rêves coquins pour une coquine comme toi.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">26-01-2025</span>
+    			à <span style="color:green;">23:42</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Je ne cherche pas à me disputer avec toi, parlons tranquillement <span style="background-color: yellow;">tu</span> as raison. Est ce que <span style="background-color: yellow;">tu</span> te sens un peu mieux quand même <span style="background-color: yellow;">?</span> J'espère que <span style="background-color: yellow;">tu</span> te remettras ! Je t'embrasse fort !
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">26-01-2025</span>
+    			à <span style="color:gray">23:39</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			On avait également convenu qu'on espacerai nos discussions et donc j'allais t'envoyer un message ce soir mais bon pas grave. Je suis toujours malade et j'en peux plus. J'espère que <span style="background-color: yellow;">tu</span> m'en voudra pas si je reste pas plus longtemps. Je te souhaite une douce et agréable nuit, fais de beaux rêves et j'espère qu'on pourra se voir prochainement. Bisous et à bientôt. Bisous.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">26-01-2025</span>
+    			à <span style="color:green;">23:27</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			J'attendais un signe de ta part le lendemain, je viens de t'expliquer. Et franchement moi je reconnait mes torts mais <span style="background-color: yellow;">tu</span> n'as pas besoin de répondre de cette manière, <span style="background-color: yellow;">tu</span> t'excuse de manière ironique et ce n'est pas terrible. Ecrire un petit message pour faire coucou ça prend 2 minutes, même si <span style="background-color: yellow;">tu</span> es malade.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">26-01-2025</span>
+    			à <span style="color:gray">23:20</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Explique moi comment <span style="background-color: yellow;">tu</span> peux attendre une réponse si on met fin à une conversation avec des bonnes nuits et bisous <span style="background-color: yellow;">?</span> Encore heureux que j'ai raison, on touche pas au maman. De plus, je t'ai dit que j'étais malade que j'étais pas vraiment en forme, je dors constamment, j'arrive pas à m'en remettre donc excuse moi, <span style="background-color: yellow;">tu</span> a beau être un futur plan cul, quand je te dis que je suis pas en état c'est que je suis pas opérationnel. <span style="background-color: yellow;">Tu</span> m'excite, <span style="background-color: yellow;">tu</span> me fais envie mais la je suis claqué.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">26-01-2025</span>
+    			à <span style="color:green;">22:52</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Effectivement c'était la fin de la conversation mais je m'attendais à une réponse le lendemain et je n'ai absolument rien reçu ! Du coup je trouve que ce n'est pas de très bon gout de complétement m'oublier comme ça. Mais <span style="background-color: yellow;">tu</span> as raison, la réflexion sur ta mère est de trop.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">26-01-2025</span>
+    			à <span style="color:gray">22:47</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Salut ça va <span style="background-color: yellow;">?</span> Alors très chère Carole, quand on dis bonne nuit à quelqu'un c'est que ça met fin à la conversation pour recommencer plus tard. Je te l'ai souhaité et <span style="background-color: yellow;">tu</span> me l'a souhaité également. Je t'ai dit bisous et toi <span style="background-color: yellow;">tu</span> m'a dit je t'embrasse donc c'était la fin de la conversation. Donc si <span style="background-color: yellow;">tu</span> veux que ça se passe bien entre nous, évite les mauvaises réflexions sur mère car je veux bien être gentil mais attention à ne pas franchir les limites. Je t'aime bien donc attention.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="
+">Zenius
+    			le <span style="color:gray">26-01-2025</span>
+    			à <span style="color:gray">22:04</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Salut, ta mère ne t'a pas appris que c'est mal de ne pas répondre quand on te parle <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Virginie H (23143)
+">Zenius
+    			le <span style="color:green;">24-01-2025</span>
+    			à <span style="color:green;">22:29</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Et encore, elle tousse encore. Et sache que <span style="background-color: yellow;">tu</span> es contagieux jusqu'à quatorze jours après les symptômes. Donc fais attention. Après la température, <span style="background-color: yellow;">tu</span> dois en avoir que <span style="background-color: yellow;">tu</span> as des piques de froid. Je sais bien que c'était une blague, mais <span style="background-color: yellow;">tu</span> aurais été rassuré d'avoir quelqu'un près de toi. Bonne nuit à toi, repose-toi bien. Je t'embrasse tendrement de loin.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">24-01-2025</span>
+    			à <span style="color:gray">22:20</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Oh merde, effectivement j'espère pas que ça m'arrive en effet. 2 semaines c'est long et je suis pas chaud à l'idée. C'était une blague, j'allais pas te contaminé, ça aurait été dommage. Merci de ton soutien et ma température est bonne, c'est ça qui est étrange mais bon j'ai assez de symptômes comme ça. On vas pas en rajouter. Allez, je vais prendre une bonne douche chaude et me coucher. Bisous, bonne nuit et fais de beaux rêves.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Virginie H (23143)
+">Zenius
+    			le <span style="color:green;">24-01-2025</span>
+    			à <span style="color:green;">22:08</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Effectivement, <span style="background-color: yellow;">tu</span> as attrapé la grippe. Et je peux te dire que celle-ci, elle est hard. J'espère que ne va pas te durer autant de jours qu'à ma meilleure amie, ça l'a couchée pendant deux semaines. Je ne préfère pas, je ne veux pas l'attraper, elle est trop mauvaise. Mais je suis près de toi par la pensée et par mes mots, c'est mieux que rien. <span style="background-color: yellow;">Tu</span> as pris ta température <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">24-01-2025</span>
+    			à <span style="color:gray">21:22</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			La liste est longue : mal de tête, j'ai la sensation que mes yeux vont sortir de leurs orbites, une rhinô, une bronchite, zéro force, nez qui coule, envie de dormir, pas d'appétit mais je me force à manger pour pas mourir de faim et que mes antibio me flingue pas l'estomac, quand je tousse je ressens une décharge électrique en haut de la colonne vertébrale, je frissonne comme ci j'étais au pôlenord. J'en peux plus, j'ai besoin d'une infirmière, <span style="background-color: yellow;">tu</span> veux pas venir<span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">24-01-2025</span>
+    			à <span style="color:green;">21:13</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Ne t'inquiète pas du tout, <span style="background-color: yellow;">tu</span> n'es pas une machine à écrire des messages coquins. Je suis désolée que <span style="background-color: yellow;">tu</span> sois malade, qu'est ce que <span style="background-color: yellow;">tu</span> as exactement <span style="background-color: yellow;">?</span> <span style="background-color: yellow;">Tu</span> as attrapé la grippe <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">24-01-2025</span>
+    			à <span style="color:gray">20:59</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Salut, excuse moi si ce soir je t'écris pas de message coquin car j'en est pas la force. Je suis tombé malade et franchement je suis pas en forme du tout. J'en peux plus et je vais me coucher tôt. Je suis littéralement à bout de force. Je te souhaite une bonne nuit fais de beaux rêves bisous minou et encore dsl.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">22:54</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Si, ça peut arriver, mais je ne suis au courant que le jour même. Mais c'est gentil ce que <span style="background-color: yellow;">tu</span> me dis, mais quand on se rencontrera, ce sera plutôt à l'extérieur, ou en hôtel mais pas chez moi. Je te souhaite aussi une douce nuit, j'espère que <span style="background-color: yellow;">tu</span> te branleras en pensant à moi ce soir. Bisous
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">22:46</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Et il y a pas un jour où il est pas là le soir<span style="background-color: yellow;">?</span> Car si jamais il vient, moi je peux venir m'occuper toi. Oh mes tkt pas, je vais t'embrasser de partout, ma bouche va parcourir ton corps de fond en comble. J'ai très envie qu'on baise, je vais te montrer comment je suis en manque de chatte. Bon allez, je te souhaite une douce et agréable nuit bien humide voir bien trempé entre tes cuisses. Hum, j'ai bien envie de te doigté jusqu'à que <span style="background-color: yellow;">tu</span> jouisse à pleine gorge. Aller bisous coquine. Bonne nuit.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">22:28</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Non, non, nous ne vivons pas ensemble. C'est lui qui vient, mais voilà il ne me laisse jamais tranquille. Et <span style="background-color: yellow;">tu</span> n'aimerais pas toi pouvoir m'embrasser où <span style="background-color: yellow;">tu</span> le souhaites <span style="background-color: yellow;">?</span> Hmm, là <span style="background-color: yellow;">tu</span> m'excites quand <span style="background-color: yellow;">tu</span> me parles comme ça. J'ai très envie de toi !
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">22:19</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Il vit chez toi, <span style="background-color: yellow;">tu</span> vit chez lui ou vous avez pris ensemble<span style="background-color: yellow;">?</span> Franchement c'est abusé qui te suivent comme un chien. C'est lui le fotif et c'est toi qui est sous surveillance. C'est toi qui veux qu'on ce pose seul dans un endroit tranquillement pour s'embrasser après qu'on ce soit promener. Ben on verra si le lieu est propice pour te baiser comme un petite salope bien chaude qui attend avec impatience de ce faite démonter pour jouir à gorge déployer. Je veux te jouir dans la bouche.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">21:48</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Je sais mais c'est dur quand même, c'est plus facile à dire qu'à faire malheureusement ahah. C'est vraiment rare que je sois seule à la maison, il est avec moi dans les magasin et au course, malheureusement mais oui je te dirais si je suis toute seule, carrément sur un banc public <span style="background-color: yellow;">?</span> C'est pas mal, j'ai envie de voir tout ça ahah.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">21:42</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Débarrasse toi de lui et <span style="background-color: yellow;">tu</span> sera plus sous surveillance. Dis lui clairement que <span style="background-color: yellow;">tu</span> sais qu'il t'a trompé et que <span style="background-color: yellow;">tu</span> veux plus de lui, qu'il aille baiser ailleurs. Y'a pas un moment où <span style="background-color: yellow;">tu</span> es seule <span style="background-color: yellow;">?</span> Quand <span style="background-color: yellow;">tu</span> fais des courses ou du shopping. C'est les soldes, <span style="background-color: yellow;">tu</span> fais genre que <span style="background-color: yellow;">tu</span> fais du shopping et moi je te rejoins. Te sauter dessus pour te faire l'amour pourquoi pas, on verra l'endroit où on sera peut-être que je te ferai ta fête sur un banc public en pleine nuit. Je veux te baiser, je suis dur.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">21:18</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			C'est l'impression que j'ai eu alors, ah oui bah là ça risque d'être compliqué ahah. La semaine je ne suis jamais seule et il me surveille donc c'est assez compliqué ! Ah oui ça te plait autant que ça <span style="background-color: yellow;">?</span> <span style="background-color: yellow;">Tu</span> ne vas pas me sauté dessus et me faire l'amour sauvagement ahah <span style="background-color: yellow;">?</span> Bisous
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">21:11</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Non je t'ai juste dis la vérité. C'était pas pour savoir si <span style="background-color: yellow;">tu</span> faisais des choses entre avec lui mais juste pour savoir si je pouvais venir chez toi te baiser comme il se doit. Je t'apprécie également. Pourquoi on ne réaliserai pas ton rêve de rencontre genre dans la semaine un soir, moi j'ai vraiment envie qu'on fasse ça rapidement car j'ai vraiment envie de te rencontrer et j'avoue que ton plan de premier rdv me plaît beaucoup mais faut faire ça rapidement.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">20:55</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Coucou, je comprends tout à fait mais j'ai l'impression que <span style="background-color: yellow;">tu</span> as été méchant. Je ne vie pas seule mais ne t'inquiète pas, il n'y a plus rien avec lui ! Je ne sais pas, peut-être que oui <span style="background-color: yellow;">?</span> Peut-être que non, mais je t'apprécie de plus en plus, pas toi <span style="background-color: yellow;">?</span> J'aimerais que l'on se rencontre autour d'un verre, que l'on discute toute la soirée et qu'on ailles se promener et se poser quelque part et parler de tout et de rien, se faire des câlins et bisous aussi.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">20:44</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Salut, je suis pas méchant, je te dis juste la vérité en toute honnêté. J'aimerais savoir 2 choses, <span style="background-color: yellow;">tu</span> vie seule ou pas<span style="background-color: yellow;">?</span> Et là 2ème chose, de la manière dont <span style="background-color: yellow;">tu</span> le dis, <span style="background-color: yellow;">tu</span> n'a pas réellement envie de me perdre mais dis-moi, <span style="background-color: yellow;">tu</span> serai pas devenu amoureuse de moi quand même <span style="background-color: yellow;">?</span> Raconte moi en détail la rencontre que <span style="background-color: yellow;">tu</span> aimerais avoir pour notre première fois car c'est toujours moi qui raconte et jamais moi donc je t'écoute.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">00:29</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Je te remercie de rester pour moi mais ne sois pas méchant avec moi non plus. Je n'ai réellement pas envie de te perdre, je ne dis pas des bêtises. <span style="background-color: yellow;">Tu</span> sais que j'imagine tout le temps notre premier rendez-vous <span style="background-color: yellow;">?</span> Comment nous allons nous embrasser fougueusement quand on se verra pour la première fois <span style="background-color: yellow;">?</span> J'adore y penser.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">22-01-2025</span>
+    			à <span style="color:gray">00:26</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Lis bien ce que je vais t'écrire. Je recharge une toute dernière fois mais vraiment une toutes dernière fois de 35 messages. Je ne le referai plus après. Si après ça, rien ne change ce sera hélas la fin à contre cœur vraiment. Si <span style="background-color: yellow;">tu</span> m'avais écouté, <span style="background-color: yellow;">tu</span> me perdrait pas mais la je pourrais pas faire plus. Je te souhaite une bonne nuit mouillée et je reviendrai vers toi tkt pas car je t'écris encore, je vais trop vite les dépenser les nouveaux crédits. Bonne nuit petite chatte en chaleur. Bisous.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Alicia A (17533)
+">Zenius
+    			le <span style="color:green;">22-01-2025</span>
+    			à <span style="color:green;">00:18</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Est ce que cette petite photo pourrait te faire changer d'avis ? Franchement je me sens bête car j'ai rechargé car je voulais continuer à parler avec toi. Je suis réellement attachée à toi et je n'ai pas envie de te perdre de cette manière. J'ai envie de faire l'amour avec toi et de jouir encore et encore.
+		  					  			<hr style="padding:0; padding-bottom:5px; margin:0;">
+		  			<a href="./OperatorPanelFR70_files/1c57da066cbfe711794ed2903419e99e70a20720.jpg" data-lightbox="conversation_2917570993">
+		  				<img src="./OperatorPanelFR70_files/1c57da066cbfe711794ed2903419e99e70a20720.jpg" witdh="50" height="50">
+		  			</a>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">23:49</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Oh et bien je suis désolé de voir que <span style="background-color: yellow;">tu</span> a recharger pour moi car hélas moi je l'avais déjà fait pour toi mais je vais pas pouvoir le faire à nouveau, vraiment désolé et c'était vraiment pas pour rien que je t'avais donné mon numéro. Du coup hélas ça vas être la fin pour nous car on ce retrouve dans une impasse de communication. Du coup, y me reste à contre cœur de te souhaiter de trouver quelqu'un qui pourra te satisfaire et de te débarrasser de ce mec qui t'a trompé dans la vie. Désolé.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">21-01-2025</span>
+    			à <span style="color:green;">23:44</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Je te remercie de me tenir au courant de tes messages, si <span style="background-color: yellow;">tu</span> le souhaites, nous pouvons espacer nos écrits, ça permettra de tenir un peu plus longtemps sur les crédits <span style="background-color: yellow;">?</span> Car je t'avoue que je viens de recharger pour toi.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">23:39</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			J'ai très envie de toi et de continuer à discuter avec moi mais je vais être à court de message, après celui-là que <span style="background-color: yellow;">tu</span> vas lire, y m'en restera que 2, ce qui vas compliquer nos échanges par la suite. J'ai vraiment kiffé discuter sexe avec toi mais je connais ton point de vu sur le sujet SMS et je vais pas te forcer la main.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">21-01-2025</span>
+    			à <span style="color:green;">23:29</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Non, je suis désolée, mais je suis dans mon lit et dans le noir. Je ne vais pas me lever pour aller allumer la lumière et pour faire une photo. Je te ferai ça plus tard quand j'y penserai d'accord <span style="background-color: yellow;">?</span> Moi aussi j'ai envie qu'on fasse des heures à faire plein de préliminaires, et à profiter de l'instant présent.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">23:23</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Envoi une photo de tes doigts pleins de cyprine stp<span style="background-color: yellow;">?</span> Fais ça pour moi stp. J'ai trop envie de voir tes doigts recouvert de ta jouissance, ta main brillé de plaisir. Stp fais ça pour moi, je t'en supplie. Et je te promet que je te baiser très fort et bien profond. J'ai qu'on passe des heures à faire un 69, que je jouisse dans ta bouche et que <span style="background-color: yellow;">tu</span> avale et que toi <span style="background-color: yellow;">tu</span> mouille comme une fontaine dans ma bouche et que j'avalerai ta cyprine avec plaisir.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">21-01-2025</span>
+    			à <span style="color:green;">23:18</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Oh oui, j'imagine et je t'avoue que ça ne me laisse pas de marbre, je suis actuellement toute mouillée avec mes doigts qui se baladent sur ma petite chatte, <span style="background-color: yellow;">tu</span> en penses quoi <span style="background-color: yellow;">?</span> Oui, quand je serai prête ! Moi aussi j'ai très envie que <span style="background-color: yellow;">tu</span> me baises, et très fort !
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">23:13</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Bien sur que je vais me faire du bien en pensant à nous. Imagine toi suspendu au plafond, les jambes bien écarter tout en te soulevant, moi à genoux en dessous, ta chatte dans ma bouche. Si <span style="background-color: yellow;">tu</span> semblant d'aller aux toilettes, <span style="background-color: yellow;">tu</span> peux en prendre une pour moi. <span style="background-color: yellow;">Tu</span> me promet dans faire une pour moi de ton petit trou<span style="background-color: yellow;">?</span> Je vais me branler de manière lente puis de plus en plus vite en imaginant te faire tous ce que je te dis. Hum ma queue est dur dans ma main. J'ai tellement envie de te baiser.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">21-01-2025</span>
+    			à <span style="color:green;">23:06</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Et toi, est-ce que <span style="background-color: yellow;">tu</span> vas te faire du bien devant nos messages <span style="background-color: yellow;">?</span> Comment <span style="background-color: yellow;">tu</span> vas te mettre en dessous de moi alors que je serai suspendu <span style="background-color: yellow;">?</span> Là pour le moment, je ne peux pas faire de photos, mais j'y penserai ! Mais branle-toi devant nos messages, et raconte-moi comment <span style="background-color: yellow;">tu</span> fais ça !
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">22:55</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			<span style="background-color: yellow;">Tu</span> peux te faire du bien devant mes messages sans problème, <span style="background-color: yellow;">tu</span> a pas à me demander. Suspendu au plafond, je vais me mettre dessous toi pour te bouffer la chatte pendant des heures sans que <span style="background-color: yellow;">tu</span> puisse faire quoique ce soit. Je vais te masturber et te doigté aussi longtemps qu'il me plaira. <span style="background-color: yellow;">Tu</span> me sentira envahir ton corps bien profondément. <span style="background-color: yellow;">Tu</span> pourrais me montrer une photo de ton petit trou<span style="background-color: yellow;">?</span> J'aimerais me masturber en le regardant et imaginant que je l'ouvre de ma queue bien dur.
+		  					  		</dd>
+		  		
+		  		
+				<dt style="color:green;" title="Operator: Dorian D (18721)
+">Zenius
+    			le <span style="color:green;">21-01-2025</span>
+    			à <span style="color:green;">22:46</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		color:green;
+		  				  		">
+		  			Miam, j'imagine très bien, et j'en frissonne déjà ! <span style="background-color: yellow;">Tu</span> m'excites beaucoup trop, j'ai envie d'avoir ta queue bien profondément dans ma bouche, mais aussi dans ma chatte pour bien me faire jouir comme une petite salope. J'ai envie de me toucher devant tes messages je peux <span style="background-color: yellow;">?</span>
+		  					  		</dd>
+		  		
+		  		
+				<dt style="" title="
+">DarcroW38
+    			le <span style="color:gray">21-01-2025</span>
+    			à <span style="color:gray">22:37</span>
+				</dt>
+		  		<dd style="border-bottom:1px solid silver; padding-bottom:5px; margin-bottom:10px;
+		  				  		
+		  				  		">
+		  			Je vais t'attacher au plafond par les poignées et te faire des bisous sur tous ton corps puis te caresser du bout des doigts pour que <span style="background-color: yellow;">tu</span> frémissement et me supplie de te baiser. Je me suis mis à te soulever et <span style="background-color: yellow;">tu</span> te penche en arrière pour être bien suspendu. Ma queue bien au fond de ta chatte dégoulinante de plaisir, on entendait nos 2 corps bien claqué l'un contre l'autre. Puis toujours suspendu, je me cale dans ton dos, ma queue dans ton cul sans bouger et ma mains qui te masturbe pour jouir.
+		  					  		</dd>
+		  				  	</dl>
+		  	</div>
+		  </div>
+		</div>
+
+						<div class="panel-group" id="accordion3">
+		    <div class="panel panel-default" id="panel-add-files">
+		        <div class="panel-heading">
+		             <h4 class="panel-title" data-toggle="collapse" data-target="#collapseAddFiles" style="cursor:pointer">Ajouter fichier (2)</h4>
+		        </div>
+		        <div id="collapseAddFiles" class="panel-collapse collapse in" style="">
+		            <div class="panel-body">
+		            	<div class="col-lg-3" style="position:relative; margin-bottom:15px;">
+		            		<input type="radio" class="attachment_id" name="attachment" value="" style="position:absolute; right:20px; top:10px;" checked="checked">
+		            		<div class="img-rounded" style="line-height:110px; height:110px; width:110px; border:1px solid; text-align:center; font-weight:bold;">Rien dájouté</div>
+		            	</div>
+		            			            		<div class="col-lg-3" style="position:relative; margin-bottom:15px;">
+		            			
+		            			<img src="./OperatorPanelFR70_files/1c57da066cbfe711794ed2903419e99e70a20720.jpg" class="img-rounded" width="110" height="110">
+		            		</div>
+		            			            		<div class="col-lg-3" style="position:relative; margin-bottom:15px;">
+		            					            				<input type="radio" class="attachment_id" name="attachment" value="7780170" style="position:absolute; right:20px; top:10px;">
+		            			
+		            			<img src="./OperatorPanelFR70_files/c56c1889cd605db7fff571d2d9299d1f258b816e.jpg" class="img-rounded" width="110" height="110">
+		            		</div>
+		            			            </div>
+		        </div>
+		    </div>
+		</div>
+		
+	</div>
+
+		<div class="col-lg-3" style="">
+
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			  	Client: DarcroW38 (ID: 43762692)
+			  				  </div>
+		  		  <div class="panel-body">
+		  		  	<img src="./OperatorPanelFR70_files/33d22000fef5062799e796085d238eb8f5fc06be.jpg" class="img-responsive img-rounded">
+
+		  		  	<div style="padding-top:15px; float:left;">
+		  		  			  		  		<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  		  			<a href="./OperatorPanelFR70_files/89a1c1adf1a8ec3c301d215bb11b7e3a3decb698.jpg" data-lightbox="DarcroW38">
+		  		  				<img src="./OperatorPanelFR70_files/89a1c1adf1a8ec3c301d215bb11b7e3a3decb698.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  		  			</a>
+		  		  		</div>
+		  		  			  		  		<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  		  			<a href="./OperatorPanelFR70_files/c96fa8e9f1dbfc08155d6bb87196a3b9d0694a6f.jpg" data-lightbox="DarcroW38">
+		  		  				<img src="./OperatorPanelFR70_files/c96fa8e9f1dbfc08155d6bb87196a3b9d0694a6f.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  		  			</a>
+		  		  		</div>
+		  		  			  		  		<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  		  			<a href="./OperatorPanelFR70_files/33d22000fef5062799e796085d238eb8f5fc06be.jpg" data-lightbox="DarcroW38">
+		  		  				<img src="./OperatorPanelFR70_files/33d22000fef5062799e796085d238eb8f5fc06be.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  		  			</a>
+		  		  		</div>
+		  		  			  		  		<div class="col-lg-6" style="margin:0; padding:0 0 5px 0;">
+		  		  			<a href="./OperatorPanelFR70_files/a5bbff1661b82b7b77637404a45b5519acf2a06c.jpg" data-lightbox="DarcroW38">
+		  		  				<img src="./OperatorPanelFR70_files/a5bbff1661b82b7b77637404a45b5519acf2a06c.jpg" class="img-rounded" style="height:110px; width:110px;">
+		  		  			</a>
+		  		  		</div>
+		  		  			  		  	</div>
+
+		  		  	<div class="row" style="padding-top:15px;">
+		  		  		<div class="col-lg-6">
+		  		  			<dl style="margin:0; padding:0;">
+		  						<dt>Nom</dt>
+		  						<dd>DarcroW</dd>
+		  		  			</dl>
+		  		  		</div>
+		  		  		<div class="col-lg-6">
+		  		  			<dl style="margin:0; padding:0;">
+		  						<dt>Pseudo</dt>
+		  						<dd>DarcroW38</dd>
+		  		  			</dl>
+		  		  		</div>
+		  		  	</div>
+
+		  	  	  	<div class="row">
+		  	  	  		<div class="col-lg-6">
+		  	  	  			<dl style="margin:0; padding:0;">
+		  	  					<dt>Sexe</dt>
+		  	  					<dd>Homme</dd>
+		  	  	  			</dl>
+		  	  	  		</div>
+		  	  	  		<div class="col-lg-6">
+		  	  	  			<dl style="margin:0; padding:0;">
+		  	  					<dt>cherche</dt>
+		  	  					<dd>Femme</dd>
+		  	  	  			</dl>
+		  	  	  		</div>
+		  	  	  	</div>
+
+		    	  	  	<div class="row">
+		    	  	  		<div class="col-lg-6">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  					<dt>Couleur des cheveux</dt>
+		    	  					<dd>Châtains</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  		<div class="col-lg-6">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  					<dt>Couleur des yeux</dt>
+		    	  					<dd>Marrons</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		    	  	  	<div class="row">
+		    	  	  		<div class="col-lg-6">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  					<dt>Silhouette</dt>
+		    	  					<dd>Quelques kilos en trop</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  		<div class="col-lg-6">
+		  		  			<dl style="margin:0; padding:0;">
+		  						<dt>Age</dt>
+		  						<dd>
+		  							<span style="font-weight:bold; color:green">
+		  								34
+		  							</span>
+
+		  							<!--small>(29-03-1990)</small-->
+		  						</dd>
+		  		  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		    	  	  	  	<div class="row">
+		    	  	  	  		<div class="col-lg-6">
+		    	  	  	  			<dl style="margin:0; padding:0;">
+		    	  	  					<dt>taille (cm)</dt>
+		    	  	  					<dd>175</dd>
+		    	  	  	  			</dl>
+		    	  	  	  		</div>
+		    	  	  	  		<div class="col-lg-6">
+		    	  	  	  			<dl style="margin:0; padding:0;">
+		    	  	  					<dt>Poids (kg)</dt>
+		    	  	  					<dd>98</dd>
+		    	  	  	  			</dl>
+		    	  	  	  		</div>
+		    	  	  	  	</div>
+
+		    	  	  	<div class="row">
+		    	  	  		<div class="col-lg-6">
+		  		  			<dl style="margin:0; padding:0;">
+		  						<dt>Fumeur</dt>
+		  						<dd></dd>
+		  		  			</dl>
+		    	  	  		</div>
+		    	  	  		<div class="col-lg-6" style="background-color: yellow;">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  	  				<dt>Statut marital</dt>
+		    	  	  				<dd>Célibataire</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		    	  	  	<div class="row" style="padding-bottom:10px">
+		    	  	  		<div class="col-lg-6">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  					<dt>Visites</dt>
+		    	  					<dd>690</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		    	  	  	<div class="row" style="padding-bottom:10px">
+		    	  	  		<div class="col-lg-12">
+		    	  	  			<dl style="margin:0; padding:0; ">
+		    	  					<dd style="color:lightgreen">
+		    	  						France, Rhône-Alpes, GRENOBLE
+		    	  					</dd>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		    	  	  	<div class="row" style="padding-bottom: 10px; background-color: yellow;">
+		    	  	  		<div class="col-lg-12">
+		    	  	  			<dl style="margin:0; padding:0;">
+		    	  					<dt>Prise de contact: <span style="font-weight:normal">20-12-2024</span></dt>
+		    	  	  			</dl>
+		    	  	  		</div>
+		    	  	  	</div>
+
+		  	  	  	<hr style="margin:0; padding-top:10px">
+
+		  	  	  	<p>
+		  	  	  		<strong>Description</strong><br>
+		  	  	  		Doué de mes mains pour de bons massages coquins, aime déguster des abricots au petit matin et je suis friand de sexe anal. Je suis là pour faire des rencontres en réel donc si me rencontrer rapidement en vrai te dis, viens me parler sinon ce sera pas possible. Je suis pas là pour du sentiments mais du sexe donc je n'attend pas des mois pour ce voir. On peux se retrouver autour d'un verre, c'est moi qui l'offre et on discute mais en vrai.
+		  	  	  	</p>
+
+		  	  	</div>
+		  	</div>
+
+						<div class="panel panel-default" style="margin-bottom:0; border-bottom:0;">
+			  <div class="panel-heading">Information personnelle du client</div>
+			  <div class="panel-body">
+			  	<form method="post" class="log_book_post" data-type="real" data-conversation-id="2256992884" data-user-id="43762692" data-operator-id="19921">
+				<input type="hidden" name="_token" value="NyXRmy14GBLCWnyRNLYntxUP9GKTMYBTCcaDqdvl">
+			  	<div class="form-group"><label class="control-label" for="log_book_category_id">Categorie</label><select name="log_book_category_id" id="log_book_category_id" class="form-control" style="visibility: visible;"><option value="2">Prénom</option><option value="4">Localisation</option><option value="5">Travail</option><option value="6">Passions</option><option value="7">Preferences sexuelles</option><option value="8">habite avec/chez</option><option value="9">Relations</option><option value="10">Santé</option></select></div>
+			  	<div class="form-group"><label class="control-label" for="log_book_text">Information</label><textarea name="log_book_text" rows="10" cols="50" id="log_book_text" class="form-control"></textarea></div>
+			  	<button type="submit" class="btn btn btn-success col-lg-12">Ajouter information personnelle</button>
+			  	</form>
+			  </div>
+			</div>
+
+			<div class="panel-group" id="accordion4">
+
+							    <div class="panel panel-default log_book_item" id="panel-1" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_1" style="cursor:pointer">Données importantes</h4>
+			        </div>
+			        <div id="sender_logbook_1" data-name="Données importantes" class="logbook_1 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-2" style="margin:0; border-radius:0;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_2" style="cursor:pointer">Prénom</h4>
+			        </div>
+			        <div id="sender_logbook_2" data-name="Prénom" class="logbook_2 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            					            					            	<div class="row" title="Operator ID: 22567">
+				            		<div class="col-lg-10 log-book-text">antony</div><div class="col-lg-2 delete-log-container"><button class="btn btn-xs btn-danger delete-log" data-id="21554046" data-type="real">X</button></div></div>
+				            				            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-3" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_3" style="cursor:pointer">Apparence</h4>
+			        </div>
+			        <div id="sender_logbook_3" data-name="Apparence" class="logbook_3 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-4" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_4" style="cursor:pointer">Localisation</h4>
+			        </div>
+			        <div id="sender_logbook_4" data-name="Localisation" class="logbook_4 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-5" style="margin:0; border-radius:0;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_5" style="cursor:pointer">Travail</h4>
+			        </div>
+			        <div id="sender_logbook_5" data-name="Travail" class="logbook_5 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            					            					            	<div class="row" title="Operator ID: 19835">
+				            		<div class="col-lg-10 log-book-text">je suis techniquement de maintenance et je travail en 2x8: 5h à 12h45 du matin et 12h45 à 20h30 voir 21h15 l'après-midi</div><div class="col-lg-2 delete-log-container"><button class="btn btn-xs btn-danger delete-log" data-id="21558189" data-type="real">X</button></div></div>
+				            				            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-6" style="margin:0; border-radius:0;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_6" style="cursor:pointer">Passions</h4>
+			        </div>
+			        <div id="sender_logbook_6" data-name="Passions" class="logbook_6 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            					            					            	<div class="row" title="Operator ID: 17310">
+				            		<div class="col-lg-10 log-book-text">mon dos, un soucis de longue date qui a empiré après un accident de voiture mais qui me laisse de lourde séquelles</div><div class="col-lg-2 delete-log-container"><button class="btn btn-xs btn-danger delete-log" data-id="21569597" data-type="real">X</button></div></div>
+				            				            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-7" style="margin:0; border-radius:0;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_7" style="cursor:pointer">Preferences sexuelles</h4>
+			        </div>
+			        <div id="sender_logbook_7" data-name="Preferences sexuelles" class="logbook_7 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            					            					            	<div class="row" title="Operator ID: 22669">
+				            		<div class="col-lg-10 log-book-text">Pour la sodomie, on est 2 car moi aussi j'aime ça, sentir ce petit trou s'ouvrir par pression de ma queue, hum un délice. Pour la domination, je pratique mais c'est pas trop mon style car j'aime quand on me domine aussi donc les deux me plaisent</div><div class="col-lg-2 delete-log-container"><button class="btn btn-xs btn-danger delete-log" data-id="21556277" data-type="real">X</button></div></div>
+				            				            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-8" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_8" style="cursor:pointer">habite avec/chez</h4>
+			        </div>
+			        <div id="sender_logbook_8" data-name="habite avec/chez" class="logbook_8 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-9" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_9" style="cursor:pointer">Relations</h4>
+			        </div>
+			        <div id="sender_logbook_9" data-name="Relations" class="logbook_9 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-10" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_10" style="cursor:pointer">Santé</h4>
+			        </div>
+			        <div id="sender_logbook_10" data-name="Santé" class="logbook_10 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    			    <div class="panel panel-default log_book_item" id="panel-11" style="margin: 0px; border-radius: 0px; display: none;">
+			        <div class="panel-heading">
+			             <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#sender_logbook_11" style="cursor:pointer">Otros</h4>
+			        </div>
+			        <div id="sender_logbook_11" data-name="Otros" class="logbook_11 log-book-container panel-collapse collapse">
+			            <div class="panel-body">
+			            				            </div>
+			        </div>
+			    </div>
+			    
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+		  	  	  	<h4>Pour</h4>
+
+		  	  	  	<ul class="list-group">
+		  	  	  				  	  	  			<li class="list-group-item">Aventure amoureuse</li>
+		  	  	  				  	  	  			<li class="list-group-item">Rendez-vous sans tabous</li>
+		  	  	  				  	  	  			<li class="list-group-item">Relation libre</li>
+		  	  	  				  	  	  			<li class="list-group-item">Juste une nuit</li>
+		  	  	  				  	  	  	</ul>
+
+		  	  	  	<hr style="margin:0; padding-top:10px">
+
+		  	  	  	<h4>Tes préférences</h4>
+
+		  	  	  	<ul class="list-group">
+		  	  	  				  	  	  			<li class="list-group-item">Rendez-vous en direct / réel</li>
+		  	  	  				  	  	  			<li class="list-group-item">Heterosexuel</li>
+		  	  	  				  	  	  			<li class="list-group-item">Jeux de rôle</li>
+		  	  	  				  	  	  			<li class="list-group-item">Massages</li>
+		  	  	  				  	  	  			<li class="list-group-item">Déguisements / Jeux</li>
+		  	  	  				  	  	  	</ul>
+
+		  	  	  	<hr style="margin:0; padding-top:10px">
+
+		  	  	  	<h4>Ton caractère</h4>
+
+		  	  	  	<ul class="list-group">
+		  	  	  				  	  	  			<li class="list-group-item">Ouvert</li>
+		  	  	  				  	  	  			<li class="list-group-item">Sociable</li>
+		  	  	  				  	  	  			<li class="list-group-item">Tendre</li>
+		  	  	  				  	  	  			<li class="list-group-item">Curieux</li>
+		  	  	  				  	  	  			<li class="list-group-item">Sensible</li>
+		  	  	  				  	  	  			<li class="list-group-item">Avec du sens de l´humour</li>
+		  	  	  				  	  	  	</ul>
+		  		  </div>
+			</div>
+
+		</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="return" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">Motif du remboursement</h4>
+      </div>
+      <form method="POST" action="https://frmoderation.com/messages/skip" accept-charset="UTF-8"><input name="_token" type="hidden" value="NyXRmy14GBLCWnyRNLYntxUP9GKTMYBTCcaDqdvl">
+      <div class="modal-body">
+        <textarea class="form-control comment_textarea" style="height:75px" name="reason" cols="50" rows="10"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Retourner au système</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End modal -->
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="attachment-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<img src="https://frmoderation.com/messages" id="attachment-preview" style="max-width: 100%; max-height: 100%">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+</div>
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-address">
+            Centanni Inc,
+            Trust Company Complex, Ajeltake Road, Ajeltake Island,
+            Majuro,
+            MH96960,
+            Marshall Islands
+        </div>
+    </div>
+</div>
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: none; width: 1263px; height: 3849px;"></div><div id="lightbox" class="lightbox" style="display: none; top: 296.667px; left: 0px;"><div class="lb-outerContainer" style="width: 470px; height: 583px;"><div class="lb-container"><img class="lb-image" src="./OperatorPanelFR70_files/1cb6ae5ede7f597d036af8d362ce0afe385cb870.jpg" style="display: block; width: 462px; height: 575px;"><div class="lb-nav" style="display: block;"><a class="lb-prev" href="https://frmoderation.com/messages" style="display: block;"></a><a class="lb-next" href="https://frmoderation.com/messages" style="display: block;"></a></div><div class="lb-loader" style="display: none;"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer" style="display: block; width: 470px;"><div class="lb-data"><div class="lb-details"><span class="lb-caption" style="display: none;"></span><span class="lb-number" style="display: none;"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><div id="wc_task_count_div" class="wc_div_position_north wc_div_theme_dark" style="display: block;"><div id="wc_inner_div"><span class="wc_row_label">Words</span><span id="wc_word_count" class="wc_row_value">84</span><span class="wc_row_label">Characters</span><span id="wc_char_count" class="wc_row_value">493</span><span class="wc_row_label">Reading time</span><span id="wc_reading_time" class="wc_row_value">&lt;1 minute</span></div></div><script src="data:text/javascript;base64,Ly8gU2NyaXB0IHBvdXIgYWdyYW5kaXIgbGEgYm/udGUgZGUgdGV4dGUNCmxldCBib3ggPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjbWVzc2FnZScpOw0KYm94LnN0eWxlLndpZHRoID0gJzYxMHB4JzsgDQpib3guc3R5bGUuaGVpZ2h0ID0gJzE2MHB4JzsNCmJveC5zdHlsZS5wb3NpdGlvbiA9ICdyZWxhdGl2ZSc7IC8vIENlbGEgcG91cnJhaXQgZOlq4CDqdHJlIGTpZmluaSwgbWFpcyBvbiBsZSByZWZhaXQgYXUgY2FzIG/5Lg0KYm94LnN0eWxlLmxlZnQgPSAnLTQzcHgnOyAvLyBE6XBsYWNlIGxhIGJv7nRlIGRlIDUwcHggdmVycyBsYSBnYXVjaGUuDQpib3guc3R5bGUudG9wID0gJy02MHB4JzsgLy8gROlwbGFjZSBsYSBib+50ZSBkZSA1MHB4IHZlcnMgbGUgaGF1dC4NCmJveC5zdHlsZS5tYXJnaW5Cb3R0b20gPSAnLTcwcHgnOyAvLyBS6WR1aXQgbCdlc3BhY2UgZW4gZGVzc291cyBkZSBsYSBib+50ZSBkZSB0ZXh0ZQ0KDQovLyBUcm91dmVyIGxhIHNlY3Rpb24gcXVpIGNvbnRpZW50IOAgbGEgZm9pcyBsYSBib+50ZSBkZSB0ZXh0ZSBldCBsZXMgYm91dG9ucyAiRW52b3llciIgZXQgIkVmZmFjZXIiDQp2YXIgc2VjdGlvbkFmaXhlciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNtZXNzYWdlX3NlbmRlciA+IGZvcm0nKTsNCg0KLy8gT2J0ZW5pciBsZXMgY29vcmRvbm7pZXMgZXQgZGltZW5zaW9ucyBhY3R1ZWxsZXMgZGUgbGEgc2VjdGlvbiDgIGZpeGVyDQp2YXIgcmVjdFNlY3Rpb25BZml4ZXIgPSBzZWN0aW9uQWZpeGVyLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOw0KDQovLyBUcm91dmVyIGwn6WzpbWVudCBwYXJlbnQgZGUgbGEgc2VjdGlvbiDgIGZpeGVyIChwb3VyIHBvdXZvaXIgbGEgcmVtZXR0cmUgcGx1cyB0YXJkKQ0KdmFyIHBhcmVudE9yaWdpbmFsID0gc2VjdGlvbkFmaXhlci5wYXJlbnRFbGVtZW50Ow0KDQovLyBDcullciB1biBub3V2ZWF1IGNvbnRlbmV1ciA8ZGl2Pg0KdmFyIG5vdXZlYXVDb250ZW5ldXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsNCm5vdXZlYXVDb250ZW5ldXIuaWQgPSAnbm91dmVhdS1jb250ZW5ldXInOw0KDQovLyBDcullciB1biDpbOltZW50IGVzcGFjZSBy6XNlcnbpIGF2ZWMgbGEgbeptZSBoYXV0ZXVyIHF1ZSBsYSBzZWN0aW9uIOAgZml4ZXINCnZhciBlc3BhY2VSZXNlcnZlID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7DQplc3BhY2VSZXNlcnZlLnN0eWxlLmhlaWdodCA9IHJlY3RTZWN0aW9uQWZpeGVyLmhlaWdodCArICdweCc7DQoNCi8vIEFwcGxpcXVlciBkZXMgc3R5bGVzIENTUyBhdSBub3V2ZWF1IGNvbnRlbmV1cg0Kbm91dmVhdUNvbnRlbmV1ci5zdHlsZS5wb3NpdGlvbiA9ICdmaXhlZCc7DQpub3V2ZWF1Q29udGVuZXVyLnN0eWxlLnRvcCA9IHJlY3RTZWN0aW9uQWZpeGVyLnRvcCArICdweCc7DQpub3V2ZWF1Q29udGVuZXVyLnN0eWxlLmxlZnQgPSByZWN0U2VjdGlvbkFmaXhlci5sZWZ0ICsgJ3B4JzsNCm5vdXZlYXVDb250ZW5ldXIuc3R5bGUud2lkdGggPSByZWN0U2VjdGlvbkFmaXhlci53aWR0aCArICdweCc7DQpub3V2ZWF1Q29udGVuZXVyLnN0eWxlLnpJbmRleCA9ICcxMDAwJzsNCm5vdXZlYXVDb250ZW5ldXIuc3R5bGUuYmFja2dyb3VuZENvbG9yID0gJyNmOGY5ZmEnOw0Kbm91dmVhdUNvbnRlbmV1ci5zdHlsZS5wYWRkaW5nID0gJzEwcHgnOw0Kbm91dmVhdUNvbnRlbmV1ci5zdHlsZS5ib3hTaGFkb3cgPSAnMHB4IC0ycHggNXB4IHJnYmEoMCwgMCwgMCwgMC4xKSc7DQoNCi8vIFRyb3V2ZXIgbGEgc2VjdGlvbiBkJ2hpc3RvcmlxdWUgZGUgY29udmVyc2F0aW9uDQp2YXIgc2VjdGlvbkhpc3RvcmlxdWUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjbWVzc2FnZV9zZW5kZXIgPiBkaXYnKTsNCg0KLy8gT2J0ZW5pciBsZXMgY29vcmRvbm7pZXMgZXQgZGltZW5zaW9ucyBkZSBsYSBzZWN0aW9uIGQnaGlzdG9yaXF1ZSBkZSBjb252ZXJzYXRpb24NCnZhciByZWN0U2VjdGlvbkhpc3RvcmlxdWUgPSBzZWN0aW9uSGlzdG9yaXF1ZS5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsNCg0KLy8gRm9uY3Rpb24gcG91ciBn6XJlciBsJ+l26W5lbWVudCBkZSBk6WZpbGVtZW50DQpmdW5jdGlvbiBoYW5kbGVTY3JvbGwoKSB7DQogICAgdmFyIHNjcm9sbFRvcCA9IHdpbmRvdy5wYWdlWU9mZnNldCB8fCBkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuc2Nyb2xsVG9wOw0KICAgIHZhciBvZmZzZXQgPSAzMDA7ICANCiAgICBpZiAoc2Nyb2xsVG9wID49IHJlY3RTZWN0aW9uSGlzdG9yaXF1ZS50b3AgLSByZWN0U2VjdGlvbkFmaXhlci5oZWlnaHQgLSBvZmZzZXQgJiYgc2Nyb2xsVG9wIDwgcmVjdFNlY3Rpb25IaXN0b3JpcXVlLmJvdHRvbSAtIG9mZnNldCkgew0KICAgICAgICAvLyBSZW1ldHRyZSBsYSBzZWN0aW9uIOAgZml4ZXIg4CBzb24gZW1wbGFjZW1lbnQgZCdvcmlnaW5lIGV0IHN1cHByaW1lciBsJ2VzcGFjZSBy6XNlcnbpDQogICAgICAgIGlmIChub3V2ZWF1Q29udGVuZXVyLmNvbnRhaW5zKHNlY3Rpb25BZml4ZXIpKSB7DQogICAgICAgICAgICBwYXJlbnRPcmlnaW5hbC5pbnNlcnRCZWZvcmUoc2VjdGlvbkFmaXhlciwgZXNwYWNlUmVzZXJ2ZSk7DQogICAgICAgICAgICBwYXJlbnRPcmlnaW5hbC5yZW1vdmVDaGlsZChlc3BhY2VSZXNlcnZlKTsNCiAgICAgICAgfQ0KICAgICAgICBub3V2ZWF1Q29udGVuZXVyLnN0eWxlLnZpc2liaWxpdHkgPSAnaGlkZGVuJzsNCiAgICB9IGVsc2Ugew0KICAgICAgICAvLyBE6XBsYWNlciBsYSBzZWN0aW9uIOAgZml4ZXIgZGFucyBsZSBub3V2ZWF1IGNvbnRlbmV1ciBldCBpbnPpcmVyIGwnZXNwYWNlIHLpc2Vydukg4CBzb24gZW1wbGFjZW1lbnQgZCdvcmlnaW5lDQogICAgICAgIGlmICghbm91dmVhdUNvbnRlbmV1ci5jb250YWlucyhzZWN0aW9uQWZpeGVyKSkgew0KICAgICAgICAgICAgcGFyZW50T3JpZ2luYWwuaW5zZXJ0QmVmb3JlKGVzcGFjZVJlc2VydmUsIHNlY3Rpb25BZml4ZXIpOw0KICAgICAgICAgICAgbm91dmVhdUNvbnRlbmV1ci5hcHBlbmRDaGlsZChzZWN0aW9uQWZpeGVyKTsNCiAgICAgICAgfQ0KICAgICAgICBub3V2ZWF1Q29udGVuZXVyLnN0eWxlLnZpc2liaWxpdHkgPSAndmlzaWJsZSc7DQogICAgfQ0KfQ0KDQovLyBBam91dGVyIGxlIG5vdXZlYXUgY29udGVuZXVyIOAgbGEgcGFnZQ0KZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChub3V2ZWF1Q29udGVuZXVyKTsNCg0KLy8gQWpvdXRlciB1biDpY291dGV1ciBkJ+l26W5lbWVudCBkZSBk6WZpbGVtZW50DQp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignc2Nyb2xsJywgaGFuZGxlU2Nyb2xsKTsNCg0KDQovLyBSYWZmcmFpY2hpc3NlbWVudCBhdXRvbWF0aXF1ZSBkZSBsYSBwYWdlDQooZnVuY3Rpb24oKSB7DQogICAgdmFyIHJlZnJlc2hJbnRlcnZhbElkOw0KICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbihlKSB7DQogICAgICAgIGlmIChlLmNvZGUgPT09ICdLZXlSJyAmJiBlLmN0cmxLZXkgJiYgZS5zaGlmdEtleSkgew0KICAgICAgICAgICAgaWYgKHJlZnJlc2hJbnRlcnZhbElkKSB7DQogICAgICAgICAgICAgICAgY2xlYXJJbnRlcnZhbChyZWZyZXNoSW50ZXJ2YWxJZCk7DQogICAgICAgICAgICAgICAgcmVmcmVzaEludGVydmFsSWQgPSBudWxsOw0KICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdBdXRvLXJlZnJlc2ggZOlzYWN0aXbpJyk7DQogICAgICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdBdXRvLXJlZnJlc2ggYWN0aXbpJyk7DQogICAgICAgICAgICAgICAgcmVmcmVzaEludGVydmFsSWQgPSBzZXRJbnRlcnZhbChmdW5jdGlvbigpIHsgbG9jYXRpb24ucmVsb2FkKCk7IH0sIDEwMDApOw0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOw0KICAgICAgICAgICAgcmV0dXJuIGZhbHNlOw0KICAgICAgICB9DQogICAgfSk7DQp9KSgpOw0KDQovLyBT6WxlY3RldXIgcG91ciBsZSBwcmVtaWVyIOls6W1lbnQgdGV4dGUNCnZhciBzZWxlY3RvcjEgPSAiYm9keSA+IGRpdi5jb250YWluZXIgPiBkaXYucm93ID4gZGl2Om50aC1jaGlsZCgxKSA+IGRpdjpudGgtY2hpbGQoMikgPiBkaXYucGFuZWwtYm9keSA+IGRpdjpudGgtY2hpbGQoMTApIjsNCg0KLy8gU+lsZWN0ZXVyIHBvdXIgbGUgZGV1eGnobWUg6WzpbWVudCB0ZXh0ZQ0KdmFyIHNlbGVjdG9yMiA9ICJib2R5ID4gZGl2LmNvbnRhaW5lciA+IGRpdi5yb3cgPiBkaXY6bnRoLWNoaWxkKDMpID4gZGl2Om50aC1jaGlsZCgxKSA+IGRpdi5wYW5lbC1ib2R5ID4gZGl2Om50aC1jaGlsZCgxMSkiOw0KDQovLyBT6WxlY3RldXIgcG91ciBsZSB0cm9pc2nobWUg6WzpbWVudCB0ZXh0ZQ0KdmFyIHNlbGVjdG9yMyA9ICJib2R5ID4gZGl2LmNvbnRhaW5lciA+IGRpdi5yb3cgPiBkaXY6bnRoLWNoaWxkKDEpID4gZGl2Om50aC1jaGlsZCgyKSA+IGRpdi5wYW5lbC1ib2R5ID4gZGl2Om50aC1jaGlsZCg4KSA+IGRpdjpudGgtY2hpbGQoMikiOw0KDQovLyBT6WxlY3RldXIgcG91ciBsZSBxdWF0cmnobWUg6WzpbWVudCB0ZXh0ZQ0KdmFyIHNlbGVjdG9yNCA9ICJib2R5ID4gZGl2LmNvbnRhaW5lciA+IGRpdi5yb3cgPiBkaXY6bnRoLWNoaWxkKDMpID4gZGl2Om50aC1jaGlsZCgxKSA+IGRpdi5wYW5lbC1ib2R5ID4gZGl2Om50aC1jaGlsZCg4KSA+IGRpdjpudGgtY2hpbGQoMikiOw0KDQovLyBGb25jdGlvbiBwb3VyIHN1cmxpZ25lciBlbiBqYXVuZSB1biDpbOltZW50DQpmdW5jdGlvbiBoaWdobGlnaHRFbGVtZW50KHNlbGVjdG9yKSB7DQogICAgdmFyIGVsZW1lbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKHNlbGVjdG9yKTsNCiAgICBpZiAoZWxlbWVudCkgew0KICAgICAgICBlbGVtZW50LnN0eWxlLmJhY2tncm91bmRDb2xvciA9ICJ5ZWxsb3ciOw0KICAgIH0NCn0NCg0KLy8gQXBwZWwgZGUgbGEgZm9uY3Rpb24gcG91ciBjaGFxdWUg6WzpbWVudCB0ZXh0ZQ0KaGlnaGxpZ2h0RWxlbWVudChzZWxlY3RvcjEpOw0KaGlnaGxpZ2h0RWxlbWVudChzZWxlY3RvcjIpOw0KaGlnaGxpZ2h0RWxlbWVudChzZWxlY3RvcjMpOw0KaGlnaGxpZ2h0RWxlbWVudChzZWxlY3RvcjQpOw0KDQovLyBT6WxlY3Rpb24gZGUgbGEgem9uZSBkZSB0ZXh0ZQ0KdmFyIHRleHRBcmVhID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI21lc3NhZ2Vfc2VuZGVyID4gZGl2Jyk7DQoNCi8vIEZvbmN0aW9uIHBvdXIgYXVnbWVudGVyIGxhIHRhaWxsZSBkdSB0ZXh0ZQ0KZnVuY3Rpb24gYXVnbWVudGVyVGFpbGxlVGV4dGUoKSB7DQogICAgLy8gTW9kaWZpZXIgbGEgdGFpbGxlIGR1IHRleHRlDQogICAgdGV4dEFyZWEuc3R5bGUuZm9udFNpemUgPSAnMTRweCc7IC8vIFJlbXBsYWNleiAnMTZweCcgcGFyIGxhIHRhaWxsZSBkZSB0ZXh0ZSBzb3VoYWl06WUNCn0NCg0KLy8gQXBwZWwgZGUgbGEgZm9uY3Rpb24gcG91ciBhdWdtZW50ZXIgbGEgdGFpbGxlIGR1IHRleHRlDQphdWdtZW50ZXJUYWlsbGVUZXh0ZSgpOw0KDQoNCg0KDQo="></script><div id="nouveau-conteneur" style="position: fixed; top: 145.302px; left: 377.969px; width: 612.948px; z-index: 1000; background-color: rgb(248, 249, 250); padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px -2px 5px; visibility: hidden;"></div></body><script id="custom-script-code-0" type="text/javascript">
+// Mettre un fond jaune sur les points d'interrogation et les mots "tu"
+document.querySelectorAll('body *').forEach(function(element) {
+    if (element.childNodes.length === 1 && element.nodeType === Node.ELEMENT_NODE) {
+        var text = element.textContent || element.innerText;
+        if (text && (text.includes('?') || text.match(/\btu\b/i))) {
+            element.innerHTML = element.innerHTML
+                .replace(/\?/g, '<span style="background-color: yellow;">?</span>')
+                .replace(/\b(tu)\b/gi, '<span style="background-color: yellow;">$1</span>');
+        }
+    }
+});
+</script></html>
